@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import paintstore.Utils.RandomStringGenerator;
 import paintstore.entity.Supplier;
 import paintstore.repository.SupplierRepository;
 import paintstore.service.SupplierService;
@@ -18,6 +19,9 @@ public class SupplierServiceImpl implements SupplierService {
 	
 	@Override
 	public void save(Supplier supplier) {
+		
+		supplier.setId(RandomStringGenerator.generateRandomString(10));
+		
 		supplier.setStatus(true);
 		supplierRepository.save(supplier);
 	}
