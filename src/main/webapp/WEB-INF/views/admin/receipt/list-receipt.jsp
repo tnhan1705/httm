@@ -39,7 +39,7 @@
 							<td style="width: 12%;" >${receipt.id}</td>
 							<td><fmt:formatDate value="${receipt.date}"
 									pattern="dd/MM/yyyy" /></td>
-							<td>${receipt.staff.account.username}</td>
+							<td>${receipt.staff.account.userName}</td>
 							<td>${receipt.supplier.name}</td>
 							<td>${receipt.status}</td>
 							<td id="edit-cell">

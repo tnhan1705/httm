@@ -33,7 +33,7 @@
 						<th>Số lượng</th>
 						<th>Giá nhập</th>
 						<th>Tổng giá</th>
-
+						<th>Thao tác</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -43,6 +43,11 @@
 							<td>${receiptDetail.quantity}</td>
 							<td>${receiptDetail.price}</td>
 							<td>${receiptDetail.price*receiptDetail.quantity}</td>
+							<c:if test="${(empty receiptDetail.product.listSeri) or (empty receipt.listSeri)}">
+								<td><a href="/admin/receipt-detail/addSeri?idp=${receiptDetail.product.id}&idr=${receiptDetail.receipt.id}" type="button"
+									class="btn btn-primary"
+									style="background-color: #4caf50; color: white; width: 100px; border: none; margin-top: 10px; margin-left: 10px">Thêm seri</a></td>
+							</c:if>
 						</tr>
 					</c:forEach>
 						<tr>

@@ -48,7 +48,10 @@ public class Receipt {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-
+	
+	@OneToMany(mappedBy = "receipt",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private List<Seri> listSeri;
+	
 	@OneToMany(mappedBy = "receipt",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<ReceiptDetail> listReceiptDetail;
 	
@@ -96,4 +99,12 @@ public class Receipt {
 		this.supplier = supplier;
 	}
 
+	public List<Seri> getListSeri() {
+		return listSeri;
+	}
+
+	public void setListSeri(List<Seri> listSeri) {
+		this.listSeri = listSeri;
+	}
+	
 }

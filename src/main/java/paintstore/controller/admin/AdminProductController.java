@@ -93,7 +93,7 @@ public class AdminProductController {
 		try {
 			MultipartFile multipartFile = avatar;
 			String fileName = multipartFile.getOriginalFilename();
-			File file = new File("D:\\ProjectLTweb\\PhoneAccessories\\src\\main\\webapp\\templates\\images\\",
+			File file = new File("D:\\cloneHTTM\\httm\\src\\main\\webapp\\templates\\image\\",
 					fileName);
 			multipartFile.transferTo(file);
 			message = "Thêm sản phẩm thành công";

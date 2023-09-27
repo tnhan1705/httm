@@ -16,12 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import aj.org.objectweb.asm.Type;
+import paintstore.Utils.RandomStringGenerator;
 import paintstore.Utils.SecurityUtils;
 import paintstore.entity.Account;
 import paintstore.entity.Product;
 import paintstore.entity.Receipt;
 import paintstore.entity.ReceiptDetail;
+import paintstore.entity.Seri;
 import paintstore.entity.Staffs;
+import paintstore.repository.ProductPepository;
 import paintstore.repository.ReceiptDetailRepository;
 import paintstore.repository.ReceiptRepository;
 import paintstore.service.AccountService;
@@ -43,6 +46,9 @@ public class AdminReceiptDetailController {
 	
 	@Autowired
 	private ReceiptRepository receiptRepository;
+	
+	@Autowired 
+	private ProductPepository productPepository;
 	
 	@GetMapping("receipt-detail/list")
 	public ModelAndView getListReceiptDetail(@RequestParam("idr") String idr) {
@@ -133,6 +139,50 @@ public class AdminReceiptDetailController {
 		mav.addObject("sum", sum);
 		return mav;
 	}
+	
+	@GetMapping("receipt-detail/addSeri")
+	public ModelAndView addSeri(@RequestParam("idp") String idp,@RequestParam("idr") String idr) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/admin/receipt/receipt-detail/add-seri");
+		Product product = productService.getProductById(idp);
+		ReceiptDetail receiptDetail = receiptDetailRepository.findOneById_ReceiptAndId_Product(idr, idp);
+		List<Seri> listSeri = new ArrayList<>();
+		for (int i = 0; i < receiptDetail.getQuantity(); i++) {
+			Seri seri = new Seri();
+			seri.setId(RandomStringGenerator.generateRandomString(10));
+			listSeri.add(seri);
+		}
+		product.setListSeri(listSeri);
+		mav.addObject("listSeri", listSeri);
+		mav.addObject("product", product);
+		mav.addObject("idp", idp);
+		mav.addObject("idr", idr);
+		return mav;
+	}
+	
+	@PostMapping("receipt-detail/addSeri")
+	public ModelAndView addSeri_save(@ModelAttribute("product") Product product,@RequestParam("idp") String idp,@RequestParam(value = "seriIds",required = false ) List<String> seriIds,@RequestParam("idr") String idr ) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/admin/receipt/receipt-detail/add-seri");
+		Product product1 = productService.getProductById(idp);
+		Receipt receipt = receiptService.findById(idr);
+		List<Seri> seris = new ArrayList<>();
+		int index =0;
+		for (String seriId : seriIds) {
+			Seri seri = new Seri();
+			seri.setId(seriId);
+			seri.setProduct(product1);
+			seri.setReceipt(receipt);
+			seri.setColor(product.getListSeri().get(index).getColor());
+			index = index +1;
+			seris.add(seri);
+	    }
+		product1.setListSeri(seris);
+		productPepository.save(product1);
+		
+		return mav;
+	}
+	
 	@ModelAttribute("products")
 	public List<Product> getlistProduct(){
 		List<Product> listProduct = productService.getListProduct();

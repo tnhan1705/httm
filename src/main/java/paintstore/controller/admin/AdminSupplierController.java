@@ -40,6 +40,7 @@ public class AdminSupplierController {
 	public ModelAndView viewAddSupplier() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin/supplier/add-supplier");
+		mav.addObject("message", "thêm nhà cung cấp thành công");
 		Supplier supplier = new Supplier();
 		mav.addObject("supplier", supplier);
 		return mav;
