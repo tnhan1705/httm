@@ -21,7 +21,7 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="/templates/images/${staff.image}" alt="Profile" class="rounded-circle">
+              <img src="/templates/image/${staff.image}" alt="Profile" class="rounded-circle">
               <h2>${staff.surname} ${staff.name}</h2>
               <h3>${staff.account.position.name}</h3>
               <div class="social-links mt-2">
@@ -74,7 +74,7 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Công việc</div>
-                    <div class="col-lg-9 col-md-8">${staff.account.username}</div>
+                    <div class="col-lg-9 col-md-8">${staff.account.userName}</div>
                   </div>
 
                   

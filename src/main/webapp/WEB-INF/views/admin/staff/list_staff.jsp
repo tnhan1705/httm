@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 
-<%@ page import="phoneaccessories.Utils.SecurityUtils"%>
+<%@ page import="paintstore.Utils.SecurityUtils"%>
 <main id="main" class="main">
 
 	<div class="pagetitle">
@@ -44,9 +44,9 @@
 							<td>${staff.address}</td>
 							<td>${staff.dateOfBirth}</td>
 							<td>${staff.sdt}</td>
-							<td>${staff.account.username}</td>
+							<td>${staff.account.userName}</td>
 							<td id="edit-cell">
-								<a style="background-color: red;" href="delete?usernameac=${staff.account.username}" class="edit-button" >Xóa</a>
+								<a style="background-color: red;" href="delete?usernameac=${staff.account.userName}" class="edit-button" >Xóa</a>
 							</td>
 						</tr>
 					</c:forEach>

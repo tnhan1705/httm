@@ -29,9 +29,9 @@
 				<div class="form-group first">
 					<label for="username">Tài Khoản</label>
 
-					<form:input path="username" type="text" class="form-control"
+					<form:input path="userName" type="text" class="form-control"
 						name="" id="username" />
-					<form:errors path="username" cssClass="text-danger" />
+					<form:errors path="userName" cssClass="text-danger" />
 
 					<c:if test="${checktk}">
 						<div class="alert alert-danger">${errorun}</div>

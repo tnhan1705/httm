@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -66,7 +67,7 @@ public class AdminStaffController {
 	}
 	@SuppressWarnings("null")
 	@PostMapping("/staff/signup")
-	public ModelAndView creatAccount(@ModelAttribute("account") Account account , @RequestParam("passwordConfirm") String paswordCf,BindingResult bindingResult,
+	public ModelAndView creatAccount(@ModelAttribute("account") Account account,@RequestParam("password") String password , @RequestParam("passwordConfirm") String paswordCf,BindingResult bindingResult,
 			@RequestParam("role") String role ) {
 		ModelAndView mav = new ModelAndView("/admin/staff/add-staff");
 		mav.addObject("check", false);
@@ -86,7 +87,7 @@ public class AdminStaffController {
 			return mav;
 		}
 		mav.addObject("checkemail", false);
-		if (account.getPassWord()== "") {
+		if (password == "") {
 			message = "Mật khẩu không được để trống";
 			mav.addObject("checkmk", true);
 			mav.addObject("errorpw", message);
@@ -99,7 +100,7 @@ public class AdminStaffController {
 
 	        return mav;
 	    }
-		if ( !paswordCf.equals(account.getPassWord())) {
+		if ( !paswordCf.equals(password)) {
 			mav.addObject("checkPassword", true);
 			mav.addObject("error", "Xác thực mật khẩu thất bại");
 			return mav;
@@ -115,7 +116,7 @@ public class AdminStaffController {
 				positionService.save(position);
 			}
 			
-			
+			account.setPassWord(password);
 			account.setPosition(position);
 		}
 		
@@ -127,7 +128,7 @@ public class AdminStaffController {
 				position.setName(role);
 				positionService.save(position);
 			}
-			
+			account.setPassWord(password);
 			account.setPosition(position);
 		}
 		 message = "Đăng kí thành công";
@@ -189,6 +190,27 @@ public class AdminStaffController {
 			mav.addObject("message", "Lưu file ảnh thất bại");
 		}
 		mav.setViewName("/admin/staff/profile");
+		return mav;
+	}
+	@PostMapping("/staff/changepassword")
+	public ModelAndView changePassword(@RequestParam("password") String password,
+										@RequestParam("newpassword") String newpassword,
+										@RequestParam("renewpassword") String renewpassword) {
+		Account account = accountService.findByUsername(SecurityUtils.getPrincipal().getUsername());
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		
+		
+		if (bCryptPasswordEncoder.matches(password, account.getPassWord())) {
+			
+			if (newpassword.equals(renewpassword)) {
+				account.setPassWord(newpassword);
+				accountService.saveStaff(account);
+			}
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/admin/staff/profile");
+		
 		return mav;
 	}
 	
