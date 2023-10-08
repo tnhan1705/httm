@@ -116,9 +116,4 @@ public class Order {
 	public void setListOrderDetail(List<OrderDetail> listOrderDetail) {
 		this.listOrderDetail = listOrderDetail;
 	}
-	
-	
-	
-	
-	
 }

@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import paintstore.entity.Account;
+import paintstore.entity.Position;
 import paintstore.repository.AccountRepository;
 import paintstore.service.AccountService;
 
@@ -52,6 +53,30 @@ public class AccountServiceImpl implements AccountService {
 		
 		accountRpst.save(account);
 
+	}
+
+	//THÊM
+	//GIO HANG
+	@Override
+	public Account getAccountById(String id) {
+		// TODO Auto-generated method stub
+		return accountRpst.findOne(id);
+	}
+
+	@Override
+	public void updatePositionByUser(String username, Position position) {
+		// TODO Auto-generated method stub
+		accountRpst.updatePositionByUserName(username, position);
+	}
+
+	@Override
+	public void saveUser(Account account) {
+		// TODO Auto-generated method stub
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		account.setPassWord(bCryptPasswordEncoder.encode(account.getPassWord()));
+		account.setStatus(true);
+		
+		accountRpst.save(account);
 	}
 
 }

@@ -1,8 +1,5 @@
 package paintstore.controller.login;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import paintstore.Utils.RandomStringGenerator;
 import paintstore.entity.Account;
 import paintstore.entity.Position;
 import paintstore.entity.User;
+import paintstore.repository.UserRepository;
+import paintstore.service.PositionService;
 import paintstore.service.Impl.AccountServiceImpl;
 
 
@@ -30,6 +30,12 @@ public class controller_login {
 	
 	@Autowired
 	private AccountServiceImpl accountImpl;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	PositionService positionService;
 	
 	@RequestMapping("/login")
 	public ModelAndView login() {
@@ -67,14 +73,15 @@ public class controller_login {
 //		return mav;
 //	}
 	
+	// Chạy giao diện
 	@RequestMapping(value = "/signin",method = RequestMethod.GET)
 	public ModelAndView singin() {
 		ModelAndView mav = new ModelAndView("login/signin");
 		Account account = new Account();
 		mav.addObject("account",account );
 		return mav;
-		
 	}
+	
 	@PostMapping("/signup")
 	public ModelAndView creatAccount(@ModelAttribute("account") Account account , @RequestParam("passwordConfirm") String paswordCf,BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView("login/signin");
@@ -113,17 +120,26 @@ public class controller_login {
 		}
 		 message = "Đăng kí thành công";
 		 mav.addObject("message", message);
-		 
+		 Position position = positionService.findOneByName("USER");
+			if (position == null) {
+				position = new Position();
+				position.setId("user");
+				position.setName("USER");
+				positionService.save(position);
+			}
+			
+				account.setPosition(position);
 		 accountImpl.save(account);
-		 List<Account> accounts = new ArrayList<>();
-		 accounts.add(account);
+			/*
+			 * List<Account> accounts = new ArrayList<>(); accounts.add(account);
+			 */
 		 User user = new User();
-		 user.setListAccount(accounts);
+		 user.setId(RandomStringGenerator.generateRandomString(10));
+		 user.setAccount(account);
 		 // lấy userRepository lưu user lại
+		 userRepository.save(user);
 		
 		return mav;
-		
-				
 	}
 	
 	@RequestMapping("/accessDenied")

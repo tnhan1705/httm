@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 
-<%@ page import="phoneaccessories.Utils.SecurityUtils"%>
+<%@ page import="paintstore.Utils.SecurityUtils"%>
 <main id="main" class="main">
 
 	<div class="pagetitle">

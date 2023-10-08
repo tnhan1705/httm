@@ -11,6 +11,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name ="CHUCVU")
 public class Position {
+	public Position(String id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
 	@Id
 	@Column(name = "MACHUCVU",length = 10)
 	private String id;
