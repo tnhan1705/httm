@@ -11,6 +11,8 @@ public interface UserProductsRepository extends JpaRepository<Product, String> {
 	List<Product> findAllByCategory_Id(String category);
 
 	List<Product> findByNameContaining(String name);
+	
+	List<Product> findByIdContaining(String id);
 
 	List<Product> findAllByOrderByNameAsc();
 

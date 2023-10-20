@@ -11,6 +11,7 @@ import paintstore.entity.Seri;
 public interface UserSeriRepository extends JpaRepository<Seri, String> {
 	List<Seri> findAllByProduct_Id(String id);
 	List<Seri> findAllByProduct_IdAndColor(String productId, String color);
+	List<Seri> findAllByColor(String color);
 	
 	@Query("SELECT COUNT(s) FROM Seri s WHERE s.product.id = :productId AND s.color = :color")
     int countByProductIdAndColor(@Param("productId") String productId, @Param("color") String color);

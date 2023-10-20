@@ -8,6 +8,8 @@ public interface UserProductsService {
 	List<Product> getProducts();
 
 	List<Product> getProductsByMDM(String MDM);
+	
+	List<Product> getProductsByMSP(String MSP);
 
 	Product getProductById(String id);
 

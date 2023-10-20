@@ -17,8 +17,17 @@
 		<li ><a>Hỗ trợ đề xuất sản phẩm</a>
 			<ul>
 				<li>
-					<textarea name="description" rows="4" cols="50"></textarea>
-					<button>Bắt đầu</button>
+				<form style="margin-top: 20px" method="get" action="/user/advise" accept-charset="UTF-8">
+					<input style ="height: 120px; width:90%" id="adviseInput" type="text" placeholder="Tư vấn"/>
+					<button type="button" onclick="advise()" id="submitButton" class="btn btn-primary">Bắt đầu</button>
+				</form>
+				<script type="text/javascript">
+					function advise() {
+						var keyword = document.getElementById("adviseInput").value;
+						var encodedText = encodeURIComponent(keyword);
+						window.location.href = "/user/advise?keyword=" + encodedText;
+					}
+				</script>
 				</li>
 			</ul>
 		</li>

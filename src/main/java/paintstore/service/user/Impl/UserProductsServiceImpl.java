@@ -24,6 +24,11 @@ public class UserProductsServiceImpl implements UserProductsService {
 	public List<Product> getProductsByMDM(String MDM) {
 		return productsRepository.findAllByCategory_Id(MDM);
 	}
+	
+	@Override
+	public List<Product> getProductsByMSP(String MSP){
+		return productsRepository.findByIdContaining(MSP);
+	}
 
 	@Override
 	public Product getProductById(String id) {

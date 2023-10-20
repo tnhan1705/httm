@@ -7,6 +7,7 @@
 		<li class="active">Sản phẩm</li>
 	</ul>
 
+	<div>${ ResultAdvise }</div>
 	<div id="myTab" class="pull-right">
 		<a href="#listView" data-toggle="tab"><span class="btn btn-large"><i
 				class="icon-list"></i></span></a> <a href="#blockView" data-toggle="tab"><span
