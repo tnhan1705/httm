@@ -7,12 +7,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Table(name = "KHACHHANG")
@@ -44,9 +47,10 @@ public class User {
 	@Column(name = "GIOITINH",length = 10)
 	private String gender;
 	
-	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
-	private List<Account> listAccount;
-	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TENTAIKHOANG")
+	private Account account;
+
 	@OneToMany(mappedBy = "user")
 	private List<Order> listOrder;
 	
@@ -117,13 +121,13 @@ public class User {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
-	public List<Account> getListAccount() {
-		return listAccount;
+	
+	public Account getAccount() {
+		return account;
 	}
 
-	public void setListAccount(List<Account> listAccount) {
-		this.listAccount = listAccount;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	public List<Order> getListOrder() {

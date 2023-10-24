@@ -45,6 +45,8 @@
 								<h3>
 									Đăng kí tài khoản <strong>PhonesShop</strong>
 								</h3>
+								
+								<a href="/user/home">Trang chủ</a>
 
 							</div>
 							<form:form action="signup" method="post" modelAttribute="account">
@@ -100,7 +102,9 @@
 									</p>
 								
 								<input type="submit" value="Đăng Kí"
-									class="btn text-white btn-block btn-primary">
+									class="btn text-white btn-block btn-primary"><a
+									href="/login" class="btn text-white btn-block btn-primary">Đăng
+									nhập</a>
 
 							</form:form>
 						</div>

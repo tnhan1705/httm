@@ -21,7 +21,7 @@ public class Seri {
 	
 	@Column(name ="MAU")
 	private String color;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name = "MASP")
 	private Product product;
@@ -73,6 +73,4 @@ public class Seri {
 	public void setReceipt(Receipt receipt) {
 		this.receipt = receipt;
 	}
-	
-	
 }

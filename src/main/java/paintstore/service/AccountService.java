@@ -3,6 +3,7 @@ package paintstore.service;
 import java.util.List;
 
 import paintstore.entity.Account;
+import paintstore.entity.Position;
 
 public interface AccountService {
 	public Account findByUsername(String username);
@@ -15,5 +16,11 @@ public interface AccountService {
 	
 	public List<String> gellListUnameAccount();
 	
-	
+	//THÊM
+			//GIO HANG
+			Account getAccountById(String id);
+					
+			public void updatePositionByUser(String username, Position position);
+			
+			public void saveUser(Account account);
 }

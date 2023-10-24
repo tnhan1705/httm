@@ -26,9 +26,21 @@ public class OrderDetail {
 	
 	@Column(name = "SOLUONG")
 	private int quantity;
+
+	@Column(name = "MAU", length=45)
+	private String color;
 	
 	public OrderDetail() {
-		// TODO Auto-generated constructor stub
+		super();
+	}
+	
+	public OrderDetail(OrderDetailPk id, int quantity, String color, Product product, Order order) {
+		super();
+		this.id = id;
+		this.quantity = quantity;
+		this.product = product;
+		this.order = order;
+		this.color = color;
 	}
 	
 	public OrderDetailPk getId() {
@@ -61,6 +73,14 @@ public class OrderDetail {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 }
 // aaaaaaaaaaaa

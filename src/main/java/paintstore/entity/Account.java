@@ -33,8 +33,7 @@ public class Account {
 	@JoinColumn(name = "MACHUCVU")
 	private Position position;
 	
-	@ManyToOne
-	@JoinColumn
+	@OneToOne(mappedBy = "account",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private User user;
 	
 	public Account() {

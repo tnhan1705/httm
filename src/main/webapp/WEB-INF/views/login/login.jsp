@@ -45,6 +45,8 @@
 								<h3>
 									Chào mừng đến với <strong>PhonesShop</strong>
 								</h3>
+								
+								<a href="/user/home">Trang chủ</a>
 
 							</div>
 							<c:if test="${param.incorrectAccount != null}">
@@ -81,7 +83,7 @@
 
 								<input type="submit" value="Đăng Nhập"
 									class="btn text-white btn-block btn-primary"> <a
-									href="/singinUser" class="btn text-white btn-block btn-primary">Đăng
+									href="/signin" class="btn text-white btn-block btn-primary">Đăng
 									kí</a> <span class="d-block text-left my-4 text-muted"> Hoặc
 									đăng nhập với </span>
 
