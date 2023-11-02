@@ -5,7 +5,7 @@
 	
 	<h4>Latest Products</h4>
 	<ul class="thumbnails">
-		<c:forEach var="productItem" items="${ product }">
+		<c:forEach var="productItem" items="${ product.content }">
 			<li class="span3">
 				<div class="thumbnail">
 					<a
@@ -14,7 +14,6 @@
 						alt="" /></a>
 					<div class="caption">
 						<h5>${ productItem.name }</h5>
-						<%-- <p>${ productItem.description }</p> --%>
 						<h4 style="text-align: center">
 							<a class="btn"
 								href="<c:url value="/user/product-details/${ productItem.id }"/>">
@@ -29,4 +28,16 @@
 			</li>
 		</c:forEach>
 	</ul>
+	<div class="pagination">
+		<ul>
+		<c:if test="${product.number > 0}">
+            <li><a href="/user/home?p=0">First</a></li>
+            <li><a href="/user/home?p=${product.number - 1}">Prev</a></li>
+        </c:if>
+        <c:if test="${product.number < product.totalPages - 1}">
+            <li><a href="/user/home?p=${product.number + 1}">Next</a></li>
+            <li><a href="/user/home?p=${product.totalPages - 1}">Last</a></li>
+        </c:if>
+		</ul>
+	</div>
 </div>

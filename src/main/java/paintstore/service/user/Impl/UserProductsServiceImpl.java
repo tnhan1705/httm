@@ -3,6 +3,8 @@ package paintstore.service.user.Impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import paintstore.entity.Product;
@@ -43,26 +45,26 @@ public class UserProductsServiceImpl implements UserProductsService {
 	}
 
 	@Override
-	public List<Product> getProductsOrderByNameAsc() {
-		// TODO Auto-generated method stub
-		return productsRepository.findAllByOrderByNameAsc();
+	public Page<Product> getProductsOrderByNameAsc(Pageable pageable) {
+		Page<Product> resultPage = productsRepository.findAllByOrderByNameAsc(pageable);
+	    return resultPage;
 	}
 
 	@Override
-	public List<Product> getProductsOrderByNameDesc() {
-		// TODO Auto-generated method stub
-		return productsRepository.findAllByOrderByNameDesc();
+	public Page<Product> getProductsOrderByNameDesc(Pageable pageable) {
+		Page<Product> resultPage = productsRepository.findAllByOrderByNameDesc(pageable);
+	    return resultPage;
 	}
 
 	@Override
-	public List<Product> getProductsOrderByPriceAsc() {
-		// TODO Auto-generated method stub
-		return productsRepository.findAllByOrderByPriceAsc();
+	public Page<Product> getProductsOrderByPriceAsc(Pageable pageable) {
+		Page<Product> resultPage = productsRepository.findAllByOrderByPriceAsc(pageable);
+	    return resultPage;
 	}
 
 	@Override
-	public List<Product> getProductsOrderByPriceDesc() {
-		// TODO Auto-generated method stub
-		return productsRepository.findAllByOrderByPriceDesc();
+	public Page<Product> getProductsOrderByPriceDesc(Pageable pageable) {
+		Page<Product> resultPage = productsRepository.findAllByOrderByPriceDesc(pageable);
+	    return resultPage;
 	}
 }

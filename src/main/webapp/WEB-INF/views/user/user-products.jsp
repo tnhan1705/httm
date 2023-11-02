@@ -16,7 +16,7 @@
 	<br class="clr" />
 	<div class="tab-content">
 		<div class="tab-pane" id="listView">
-			<c:forEach var="productItem" items="${ product }">
+			<c:forEach var="productItem" items="${ product.content }">
 				<div class="row">
 					<div class="span2">
 						<img width="100"
@@ -56,7 +56,7 @@
 
 		<div class="tab-pane  active" id="blockView">
 			<ul class="thumbnails">
-				<c:forEach var="productItem" items="${ product }">
+				<c:forEach var="productItem" items="${ product.content }">
 					<li class="span3">
 						<div class="thumbnail">
 							<a
@@ -91,13 +91,14 @@
 	<!-- Phân trang -->
 	<div class="pagination">
 		<ul>
-			<li><a href="#">&lsaquo;</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">...</a></li>
-			<li><a href="#">&rsaquo;</a></li>
+		<c:if test="${product.number > 0}">
+            <li><a href="/user/products/${id}?p=0">First</a></li>
+            <li><a href="/user/products/${id}?p=${product.number - 1}">Prev</a></li>
+        </c:if>
+        <c:if test="${product.number < product.totalPages - 1}">
+            <li><a href="/user/products/${id}?p=${product.number + 1}">Next</a></li>
+            <li><a href="/user/products/${id}?p=${product.totalPages - 1}">Last</a></li>
+        </c:if>
 		</ul>
 	</div>
 	<br class="clr" />

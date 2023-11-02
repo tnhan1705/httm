@@ -43,16 +43,16 @@
 		<br/><!-- class="subMenu open" -->
 		<li><a>Sắp xếp</a>
 			<ul>
-				<li><a href='<c:url value="/user/products/sort?sortType=name-asc"/>'> <i
+				<li><a href='<c:url value="/user/products/?sortType=name-asc"/>'> <i
 						class="icon-chevron-right"></i>Theo tên A-Z
 				</a></li>
-				<li><a href='<c:url value="/user/products/sort?sortType=name-desc"/>'> <i
+				<li><a href='<c:url value="/user/products/?sortType=name-desc"/>'> <i
 						class="icon-chevron-right"></i>Theo tên Z-A
 				</a></li>
-				<li><a href='<c:url value="/user/products/sort?sortType=price-asc"/>'> <i
+				<li><a href='<c:url value="/user/products/?sortType=price-asc"/>'> <i
 						class="icon-chevron-right"></i>Theo giá tiền tăng dần
 				</a></li>
-				<li><a href='<c:url value="/user/products/sort?sortType=price-desc"/>'> <i
+				<li><a href='<c:url value="/user/products/?sortType=price-desc"/>'> <i
 						class="icon-chevron-right"></i>Theo giá tiền giảm dần
 				</a></li>
 			</ul>

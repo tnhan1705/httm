@@ -8,8 +8,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,6 +68,7 @@ public class UserHomeController {
 	@Autowired
 	UserSeriServiceImpl userSeriServiceImpl; 
 
+	
 	@RequestMapping("home")
 	public ModelAndView home(ModelMap modelMap) {
 		ModelAndView mav = new ModelAndView("user/user-home");
@@ -70,7 +77,28 @@ public class UserHomeController {
 		mav.addObject("product", userProductsServiceImpl.getProducts());
 		return mav;
 	}
+	 
 
+	@GetMapping("home")
+	public ModelAndView paging(@RequestParam("p") Optional<Integer> p) {
+		int pageNumber = p.orElse(0);
+		Pageable pageable = new PageRequest(pageNumber, 5);
+		ModelAndView mav = new ModelAndView("user/user-home");
+		List<Product> productList = userProductsServiceImpl.getProducts();
+		List<Product> productsOnPage = getProductListForPage(productList, pageable);
+		Page<Product> page = new PageImpl<>(productsOnPage, pageable, productList.size());
+		mav.addObject("slide", userHomeServiceImpl.getProductSlide());
+		mav.addObject("product", page);
+		mav.addObject("category", userHomeServiceImpl.getCategory());
+		return mav;
+	}
+	
+	private List<Product> getProductListForPage(List<Product> allProducts, Pageable pageable) {
+	    int start = (int) pageable.getOffset();
+	    int end = Math.min((start + pageable.getPageSize()), allProducts.size());
+	    return allProducts.subList(start, end);
+	}
+	
 	// Search
 	@GetMapping("/search")
 	public ModelAndView search(@RequestParam("keyword") String keyword, Model model) {
@@ -112,23 +140,22 @@ public class UserHomeController {
 	}
 
 	// Sort
-	@GetMapping("/price")
-	public ModelAndView getProductsBySortType(@RequestParam("sortType") String sortType, Model model) {
-		List<Product> products = new ArrayList<>();
-		if (sortType.equals("price-asc")) {
-			products = userProductsServiceImpl.getProductsOrderByPriceAsc();
-		} else if (sortType.equals("price-desc")) {
-			products = userProductsServiceImpl.getProductsOrderByPriceDesc();
-		} else if (sortType.equals("name-asc")) {
-			products = userProductsServiceImpl.getProductsOrderByNameAsc();
-		} else if (sortType.equals("name-desc")) {
-			products = userProductsServiceImpl.getProductsOrderByNameDesc();
-		}
-
-		ModelAndView mv = new ModelAndView("user/product");
-		mv.addObject("product", products);
-		return mv;
-	}
+	/*
+	 * @GetMapping("/price") public ModelAndView
+	 * getProductsBySortType(@RequestParam("sortType") String sortType, Model model)
+	 * { List<Product> products = new ArrayList<>(); if
+	 * (sortType.equals("price-asc")) { products =
+	 * userProductsServiceImpl.getProductsOrderByPriceAsc(); } else if
+	 * (sortType.equals("price-desc")) { products =
+	 * userProductsServiceImpl.getProductsOrderByPriceDesc(); } else if
+	 * (sortType.equals("name-asc")) { products =
+	 * userProductsServiceImpl.getProductsOrderByNameAsc(); } else if
+	 * (sortType.equals("name-desc")) { products =
+	 * userProductsServiceImpl.getProductsOrderByNameDesc(); }
+	 * 
+	 * ModelAndView mv = new ModelAndView("user/product"); mv.addObject("product",
+	 * products); return mv; }
+	 */
 
 	@ModelAttribute("checkLogin")
 	public Account showAccount() {

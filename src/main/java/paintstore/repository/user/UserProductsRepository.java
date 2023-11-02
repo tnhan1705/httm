@@ -2,6 +2,8 @@ package paintstore.repository.user;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import paintstore.entity.Product;
@@ -14,11 +16,11 @@ public interface UserProductsRepository extends JpaRepository<Product, String> {
 	
 	List<Product> findByIdContaining(String id);
 
-	List<Product> findAllByOrderByNameAsc();
+	Page<Product> findAllByOrderByNameAsc(Pageable pageable);
 
-	List<Product> findAllByOrderByNameDesc();
+	Page<Product> findAllByOrderByNameDesc(Pageable pageable);
 
-	List<Product> findAllByOrderByPriceAsc();
+	Page<Product> findAllByOrderByPriceAsc(Pageable pageable);
 
-	List<Product> findAllByOrderByPriceDesc();
+	Page<Product> findAllByOrderByPriceDesc(Pageable pageable);
 }

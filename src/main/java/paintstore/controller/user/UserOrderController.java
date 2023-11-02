@@ -209,6 +209,11 @@ public class UserOrderController {
 		        String message = "Sản phẩm đã tồn tại trong giỏ hàng.";
 		        mv.addObject("message", message);
 		    } else {
+				/*
+				 * if (number <= 0) { String message = "Chọn số lượng của sản phẩm"; mv = new
+				 * ModelAndView("redirect:/product-details/" + id); mv.addObject("message",
+				 * message); return mv; } mv = new ModelAndView("user/user-cart");
+				 */
 		        OrderDetail orderDetail = new OrderDetail(ids, number, selectedColor, product, order);
 		        orderDetailService.save(orderDetail);
 		    }

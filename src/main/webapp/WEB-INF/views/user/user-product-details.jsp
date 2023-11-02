@@ -6,8 +6,8 @@
 
 <div class="span9">
 	<ul class="breadcrumb">
-		<li><a href="index.html">Trang chủ</a> <span class="divider">/</span></li>
-		<li><a href="products.html">Sản phẩm</a> <span class="divider">/</span></li>
+		<li><a href="/user/home">Trang chủ</a> <span class="divider">/</span></li>
+		<li class="active">Sản phẩm<span class="divider">/</span></li>
 		<li class="active">Chi tiết sản phẩm</li>
 	</ul>
 	<div class="row">
@@ -25,6 +25,7 @@
 				</div>
 			</div>
 		</div>
+		<h3>${ message }</h3>
 		<div class="span6">
 			<h3>${ productDetails.name }</h3>
 			<hr class="soft" />
@@ -35,10 +36,10 @@
 								value="${productDetails.price}" type="currency"
 								currencySymbol="" maxFractionDigits="0"></fmt:formatNumber> đ</span></label>
 					<div class="controls">
-						<input type="number" min="0" name="number"
-							max="${ productDetails.number }" class="span1" value="1" /> <input
+						<input type="number" min="${productDetails.number > 0 ? 1 : 0}" name="number"
+							max="${ productDetails.number }" class="span1" value="${productDetails.number > 0 ? 1 : 0}" /> <input
 							type="hidden" name="productId" value="${productDetails.id}" />
-						<button type="submit" class="btn btn-large btn-primary pull-right">
+						<button type="submit" class="btn btn-large btn-primary pull-right" ${productDetails.number == 0 ? 'disabled' : ''}>
 							Thêm vào giỏ hàng <i class="icon-shopping-cart"></i>
 						</button>
 					</div>

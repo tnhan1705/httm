@@ -2,6 +2,9 @@ package paintstore.service.user;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import paintstore.entity.Product;
 
 public interface UserProductsService {
@@ -15,11 +18,11 @@ public interface UserProductsService {
 
 	List<Product> searchProductByName(String name);
 
-	List<Product> getProductsOrderByNameAsc();
+	Page<Product> getProductsOrderByPriceAsc(Pageable pageable);
 
-	List<Product> getProductsOrderByNameDesc();
+	Page<Product> getProductsOrderByNameDesc(Pageable pageable);
 
-	List<Product> getProductsOrderByPriceAsc();
+	Page<Product> getProductsOrderByNameAsc(Pageable pageable);
 
-	List<Product> getProductsOrderByPriceDesc();
+	Page<Product> getProductsOrderByPriceDesc(Pageable pageable);
 }
