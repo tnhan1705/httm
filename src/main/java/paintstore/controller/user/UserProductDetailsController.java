@@ -1,5 +1,9 @@
 package paintstore.controller.user;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -16,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import paintstore.Utils.SecurityUtils;
 import paintstore.dto.MyUser;
 import paintstore.entity.Account;
+import paintstore.entity.Seri;
 import paintstore.service.AccountService;
 import paintstore.service.user.UserSeriService;
 import paintstore.service.user.Impl.UserHomeServiceImpl;
@@ -44,6 +49,15 @@ public class UserProductDetailsController {
 		mav.addObject("productDetails", userProductDetailsServiceImpl.getProductDetails(id));
 		mav.addObject("productSeries", userSeriServiceImpl.getAllSeriByProduct(id));
 		mav.addObject("category", userHomeServiceImpl.getCategory());
+		
+		List<Seri> listSeri = userSeriServiceImpl.getAllSeriByProduct(id);
+		Map<String, Integer> mp= new HashMap<>();
+		for (Seri seri : listSeri) {
+			String color = seri.getColor();
+			mp.put(color,mp.getOrDefault(color, 0)+ 1);
+		}
+		mav.addObject("numberAndQuantity", mp);
+		mav.addObject("initialQuantity", listSeri.size());
 		return mav;
 	}
 

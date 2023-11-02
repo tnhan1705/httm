@@ -20,7 +20,7 @@
 				<div class="row">
 					<div class="span2">
 						<img width="100"
-							src="/templates/User/bootstrap-shop/themes/images/Product/${ productItem.image }"
+							src="/templates/image/${ productItem.image }"
 							alt="" />
 					</div>
 					<div class="span4">

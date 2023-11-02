@@ -45,7 +45,7 @@
 				</div>
 
 				<hr class="soft" />
-				<h4 id="quantity">Còn <span id="quantityDisplay">x</span> sản phẩm trong kho</h4>
+				<h4 id="quantity">Còn <span id="quantityDisplay">${initialQuantity}</span> sản phẩm trong kho</h4>
 				<div class="form-horizontal qtyFrm pull-right">
 					<div class="control-group">
 						<h5>
@@ -53,8 +53,8 @@
 						</h5>
 						<div class="controls">
 							<select class="span2" name="selectedColor" id="selectedColor">
-								<c:forEach var="productSeri" items="${ productSeries }">
-									<option value="${ productSeri.color }">${ productSeri.color }</option>
+								<c:forEach var="Color" items="${ numberAndQuantity }">
+									<option value="${ Color.key }">${ Color.key } (${ Color.value})</option>
 								</c:forEach>
 							</select>
 						</div>
