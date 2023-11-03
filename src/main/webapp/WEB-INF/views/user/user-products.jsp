@@ -62,7 +62,7 @@
 							<a
 								href="<c:url value="/user/product-details/${ productItem.id }"/>"><img
 								width="100"
-								src="/templates/User/bootstrap-shop/themes/images/Product/${ productItem.image }"
+								src="/templates/image/${ productItem.image }"
 								alt="" /></a>
 							<div class="caption">
 								<h5>${ productItem.name }</h5>
