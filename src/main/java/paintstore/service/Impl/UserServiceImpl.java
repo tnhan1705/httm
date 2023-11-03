@@ -1,9 +1,12 @@
 package paintstore.service.Impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import paintstore.entity.Account;
+import paintstore.entity.Staffs;
 import paintstore.entity.User;
 import paintstore.repository.UserRepository;
 import paintstore.service.UserService;
@@ -41,6 +44,11 @@ public class UserServiceImpl implements UserService {
 	public User getUserById(String id) {
 		// TODO Auto-generated method stub
 		return userRepository.findOne(id);
+	}
+	
+	@Override
+	public List<User> findAllByStatus(boolean status) {
+		return userRepository.findAllByAccountStatus(true);
 	}
 
 }

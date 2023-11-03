@@ -43,10 +43,10 @@
 							<td>${user.surname} ${user.name}</td>
 							<td>${user.address}</td>
 							<td>${user.dayOfBirth}</td>
-							<td>${user.sdt}</td>
-							<td>${user.account.username}</td>
+							<td>${user.phone}</td>
+							<td>${user.account.userName}</td>
 							<td id="edit-cell" >
-								<a style="background-color: red;" href="delete?usernameac=${user.account.username}" class="edit-button" >Xóa</a>
+								<a style="background-color: red;" href="delete?usernameac=${user.account.userName}" class="edit-button" >Khóa</a>
 							</td>
 						</tr>
 					</c:forEach>

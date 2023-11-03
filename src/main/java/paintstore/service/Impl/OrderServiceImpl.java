@@ -26,7 +26,12 @@ public class OrderServiceImpl implements OrderService {
 	public Order findOneById(Long ido) {
 		return orderRepository.findOne(ido);
 	}
-
+    
+	@Override
+	public Order getOrderById(String ido) {
+		return orderRepository.findOneById(ido);
+	}
+	
 	@Override
 	public void save(Order order) {
 		orderRepository.save(order);
@@ -58,5 +63,6 @@ public class OrderServiceImpl implements OrderService {
 	public Order getOrderByUserAndIdOrder(User user, String order) {
 		// TODO Auto-generated method stub
 		return orderRepository.findByUserAndIdCart(user, order);
-	}	
+	}
+
 }

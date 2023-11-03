@@ -40,20 +40,21 @@
 							<td>${order.id}</td>
 							<td><fmt:formatDate value="${order.date}"
 									pattern="dd/MM/yyyy" /></td>
-							<td>${order.user.account.username}</td>
-							<td>${order.staff.account.username}</td>
-							<td>${order.pay.typePay}</td>
-							<td>${order.status}</td>
-							<td>
-								<div class="button-container">
-									<a href="/admin/order/detail?idc=${order.cart.id}"
-										class="edit-button">Xem chi tiết phiết đặt</a>
-									<c:if test="${order.status == 'Đã Xác Nhận'}">
-										<a href="/admin/order/ship?ido=${order.id}"
-											class="edit-button">Đóng gói Hoàn Tất</a>
-									</c:if>
-								</div>
-							</td>
+							<td>${order.user.name}</td>
+							<td>${order.staff.name}</td>
+						    <td>${order.pay}</td> -
+					        <td>${order.status}</td>
+	         				<td>
+                                  <div class="button-container" style="display: inline-block;">
+                                     <a href="/admin/order/detail?idc=${order.id}" class="edit-button">Chi tiết</a>
+                                     <c:if test="${order.status == 'Đã Xác Nhận'}">
+                                     <a href="/admin/order/ship?ido=${order.id}" class="edit-button">Đóng gói Hoàn Tất</a>
+                                     </c:if>
+                                     <a href="confirm?ido=${order.id}" class="edit-button">Xác nhận</a>
+                                     <a href="delete?ido=${order.id}" class="edit-button" style="background-color: red"
+                                     onclick="return confirm('Bạn có chắc chắn muốn xóa đơn đặt hàng này?');">Hủy</a>
+                                  </div>
+                            </td>
 
 						</tr>
 					</c:forEach>
@@ -85,3 +86,4 @@
     flex-basis: 48%; /* Điều chỉnh kích thước của thẻ "a" */
   }
 </style>
+

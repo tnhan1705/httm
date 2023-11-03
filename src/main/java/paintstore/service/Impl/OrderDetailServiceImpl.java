@@ -1,5 +1,7 @@
 package paintstore.service.Impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,11 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	@Autowired
 	OrderDetailRepository orderDetailRepository;
 
+	@Override
+	public List<OrderDetail> getListOrderDetail() {
+		return orderDetailRepository.findAll();
+	}
+	
 	@Override
 	public OrderDetail save(OrderDetail OrderDetail) {
 		// TODO Auto-generated method stub
@@ -34,4 +41,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		// TODO Auto-generated method stub
 		orderDetailRepository.deleteByProductIdAndOrderId(product, order);
 	}
+	
+	@Override
+	public List<OrderDetail> getOrderDetailsByOrderId(String orderId) {
+        return orderDetailRepository.findByOrderId(orderId);
+    }
 }

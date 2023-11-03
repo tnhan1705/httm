@@ -1,5 +1,7 @@
 package paintstore.service;
 
+import java.util.List;
+
 import paintstore.entity.Account;
 import paintstore.entity.User;
 
@@ -13,4 +15,6 @@ public interface UserService {
 	void updateUser(User user);
 	
 	User getUserById(String id);
+	
+	List<User> findAllByStatus(boolean status);
 }

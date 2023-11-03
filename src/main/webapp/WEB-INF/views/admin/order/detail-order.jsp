@@ -28,7 +28,7 @@
 					<label>Họ tên:</label> <span>${order.user.surname} ${order.user.name}</span>
 				</div>
 				<div class="user-field">
-					<label>Số điện thoại:</label> <span>${order.user.sdt}</span>
+					<label>Số điện thoại:</label> <span>${order.user.phone}</span>
 				</div>
 				<div class="user-field">
 					<label>Địa chỉ:</label> <span>${order.user.address}</span>
