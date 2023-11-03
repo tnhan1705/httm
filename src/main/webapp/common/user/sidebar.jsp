@@ -18,7 +18,7 @@
 			<ul>
 				<li>
 				<form style="margin-top: 20px" method="get" action="/user/advise" accept-charset="UTF-8">
-					<input style ="height: 120px; width:90%" id="adviseInput" type="text" placeholder="Tư vấn"/>
+					<textarea style ="height: 120px; width:90%;" id="adviseInput" type="text" placeholder="Tư vấn"></textarea>
 					<button type="button" onclick="advise()" id="submitButton" class="btn btn-primary">Bắt đầu</button>
 				</form>
 				<script type="text/javascript">

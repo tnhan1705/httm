@@ -16,6 +16,11 @@
 	<br class="clr" />
 	<div class="tab-content">
 		<div class="tab-pane" id="listView">
+		<c:choose>
+    <c:when test="${empty product.content}">
+        <div>Không có sản phẩm nào để hiển thị</div>
+    </c:when>
+    <c:otherwise>
 			<c:forEach var="productItem" items="${ product.content }">
 				<div class="row">
 					<div class="span2">
@@ -51,11 +56,18 @@
 					</div>
 				</div>
 			</c:forEach>
-
+<!-- Other content for the 'otherwise' case -->
+    </c:otherwise>
+</c:choose>
 		</div>
 
 		<div class="tab-pane  active" id="blockView">
-			<ul class="thumbnails">
+					<c:choose>
+    <c:when test="${empty product.content}">
+        <div>Không có sản phẩm nào để hiển thị</div>
+    </c:when>
+    <c:otherwise>
+    			<ul class="thumbnails">
 				<c:forEach var="productItem" items="${ product.content }">
 					<li class="span3">
 						<div class="thumbnail">
@@ -81,7 +93,11 @@
 						</div>
 					</li>
 				</c:forEach>
-			</ul>
+							</ul>
+				<!-- Other content for the 'otherwise' case -->
+    </c:otherwise>
+    
+</c:choose>
 			<hr class="soft" />
 		</div>
 	</div>

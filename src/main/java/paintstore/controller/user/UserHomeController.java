@@ -29,14 +29,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mysql.cj.util.Util;
+
+import paintstore.Utils.RandomStringGenerator;
 import paintstore.Utils.SecurityUtils;
 import paintstore.dto.MyUser;
 import paintstore.entity.Account;
+import paintstore.entity.Data;
 import paintstore.entity.Product;
 import paintstore.entity.Seri;
 import paintstore.entity.User;
 import paintstore.repository.user.UserHomeCategoryRepositoy;
 import paintstore.service.AccountService;
+import paintstore.service.DataService;
 import paintstore.service.UserService;
 import paintstore.service.user.UserProductsService;
 import paintstore.service.user.UserSeriService;
@@ -61,6 +66,9 @@ public class UserHomeController {
 
 	@Autowired
 	UserService userService;
+	
+	//@Autowired
+	//DataService dataService;
 
 	@Autowired
 	UserProductsService userProductsService;
@@ -111,7 +119,7 @@ public class UserHomeController {
 	
 	// Advise
 	@GetMapping("/advise")
-	public ModelAndView advise(@RequestParam(name = "keyword") String keyword, Model model) throws UnsupportedEncodingException {
+	public ModelAndView advise(@RequestParam(name = "keyword") String keyword, Model model, @RequestParam("p") Optional<Integer> p) throws UnsupportedEncodingException {
 		ModelAndView mav = new ModelAndView("user/user-products");
 		RestTemplate restTemplate = new RestTemplate();
         String pythonServiceUrl = "http://localhost:5000/GetAdvise"; // Replace with the actual Python service URL
@@ -120,7 +128,7 @@ public class UserHomeController {
         String result = restTemplate.postForObject(pythonServiceUrl, keywordBytes, String.class);
         byte[] utf8Bytes = result.getBytes("UTF-8");
         String decodedText = new String(utf8Bytes, StandardCharsets.UTF_8);
-        mav.addObject("ResultAdvise", decodedText);
+        mav.addObject("ResultAdvise", "Màu sắc phù hợp với nhu cầu của bạn là: " + decodedText);
         List<Seri> listSeri = userSeriServiceImpl.getAllSeriByColor(decodedText);
         // Sử dụng HashSet để loại bỏ các MSP trùng nhau
         HashSet<String> seenMSP = new HashSet<>();
@@ -135,7 +143,19 @@ public class UserHomeController {
         for (Seri seri : uniqueList) {
 			listProduct.addAll(userProductsServiceImpl.getProductsByMSP(seri.getProduct().getId()));
 		}
-        mav.addObject("product", listProduct);
+        int pageNumber = p.orElse(0);
+	    Pageable pageable = new PageRequest(pageNumber, 6);
+	    Page<Product> page;
+		List<Product> productsOnPage = getProductListForPage(listProduct, pageable);
+		page = new PageImpl<>(productsOnPage, pageable, listProduct.size());
+        mav.addObject("product", page);
+        
+        /*
+        Data data = new Data();
+        data.setId(RandomStringGenerator.generateRandomString(10));
+        data.setContent(decodedText);
+        */
+        //dataService.save(data);
 		return mav;
 	}
 

@@ -43,13 +43,15 @@ public class UserProductsController {
 	AccountService accountService;
 	
 	
-	/*
-	 * @RequestMapping(value = { "products/{id}" }) public ModelAndView
-	 * products(@PathVariable String id) { ModelAndView mav = new
-	 * ModelAndView("user/user-products"); mav.addObject("product",
-	 * userProductsServiceImpl.getProductsByMDM(id)); mav.addObject("category",
-	 * userHomeServiceImpl.getCategory()); return mav; }
-	 */
+	
+	@RequestMapping(value = { "products/{id}" }) public ModelAndView
+	 products(@PathVariable String id) { ModelAndView mav = new
+	 ModelAndView("user/user-products"); mav.addObject("product",
+	 userProductsServiceImpl.getProductsByMDM(id)); mav.addObject("category",
+	 userHomeServiceImpl.getCategory()); 
+	 return mav; 
+	 }
+	 
 	 
 	
 	@GetMapping("products/{id}")
