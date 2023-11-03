@@ -82,7 +82,7 @@ public class UserHomeController {
 	@GetMapping("home")
 	public ModelAndView paging(@RequestParam("p") Optional<Integer> p) {
 		int pageNumber = p.orElse(0);
-		Pageable pageable = new PageRequest(pageNumber, 6);
+		Pageable pageable = new PageRequest(pageNumber, 5);
 		ModelAndView mav = new ModelAndView("user/user-home");
 		List<Product> productList = userProductsServiceImpl.getProducts();
 		List<Product> productsOnPage = getProductListForPage(productList, pageable);

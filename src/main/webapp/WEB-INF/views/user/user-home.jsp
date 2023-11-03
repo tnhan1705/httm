@@ -9,7 +9,7 @@
 			<li class="span3">
 				<div class="thumbnail">
 					<a
-						href="<c:url value="/user/product-details/${ productItem.id }"/>"><img width="150" height="150"
+						href="<c:url value="/user/product-details/${ productItem.id }"/>"><img width="100"
 						src="/templates/image/${ productItem.image }"
 						alt="" /></a>
 					<div class="caption">
