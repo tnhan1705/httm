@@ -38,6 +38,9 @@ public class Order {
 	@Column(name = "TRANGTHAI", length = 500)
 	private String status;
 	
+	@Column(name = "THANHTOAN", length = 500)
+	private String pay;
+	
 	@ManyToOne
 	@JoinColumn(name = "MANV")
 	private Staffs staff;
@@ -93,6 +96,14 @@ public class Order {
 		this.status = status;
 	}
 
+	public String getPay() {
+		return pay;
+	}
+
+	public void setPay(String status) {
+		this.pay = status;
+	}
+	
 	public Staffs getStaff() {
 		return staff;
 	}

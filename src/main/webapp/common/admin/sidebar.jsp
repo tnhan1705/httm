@@ -106,7 +106,7 @@
 					<li><a href="/admin/staff/list"> <i
 							class="bi bi-circle"></i><span>Danh sách nhân viên</span>
 					</a></li>
-					<li><a href="/admin/user/list"> <i
+					<li><a href="/admin/users/list"> <i
 							class="bi bi-circle"></i><span>Danh sách khách hàng</span>
 					</a></li>
 					

@@ -9,6 +9,7 @@ public interface OrderService {
 	List<Order> getListOrder();
 	List<Order> getOrderByUser(User user);
 	Order findOneById(Long ido);
+	Order getOrderById(String ido);
 	void save(Order order);
 	Order findOrderByUser(User user);
 	Order findOrderByStatus(String status);
