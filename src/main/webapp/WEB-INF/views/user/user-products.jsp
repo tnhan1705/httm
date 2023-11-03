@@ -15,13 +15,12 @@
 	</div>
 	<br class="clr" />
 	<div class="tab-content">
-		<div class="tab-pane" id="listView">
-			<c:forEach var="productItem" items="${ product.content }">
+		<c:forEach var="productItem" items="${ product.content }">
+			<div class="tab-pane" id="listView">
 				<div class="row">
 					<div class="span2">
-						<img width="100"
-							src="/templates/image/${ productItem.image }"
-							alt="" />
+						<img src="/templates/image/${ productItem.image }" alt=""
+							width="150px" height="150px" />
 					</div>
 					<div class="span4">
 						<h3>${ productItem.name }</h3>
@@ -50,9 +49,8 @@
 						</form>
 					</div>
 				</div>
-			</c:forEach>
-
-		</div>
+			</div>
+		</c:forEach>
 
 		<div class="tab-pane  active" id="blockView">
 			<ul class="thumbnails">
@@ -61,9 +59,8 @@
 						<div class="thumbnail">
 							<a
 								href="<c:url value="/user/product-details/${ productItem.id }"/>"><img
-								width="100"
-								src="/templates/User/bootstrap-shop/themes/images/Product/${ productItem.image }"
-								alt="" /></a>
+								width="150" height="150"
+								src="/templates/image/${ productItem.image }" alt="" /></a>
 							<div class="caption">
 								<h5>${ productItem.name }</h5>
 								<h4 style="text-align: center">
@@ -91,14 +88,14 @@
 	<!-- Phân trang -->
 	<div class="pagination">
 		<ul>
-		<c:if test="${product.number > 0}">
-            <li><a href="/user/products/${id}?p=0">First</a></li>
-            <li><a href="/user/products/${id}?p=${product.number - 1}">Prev</a></li>
-        </c:if>
-        <c:if test="${product.number < product.totalPages - 1}">
-            <li><a href="/user/products/${id}?p=${product.number + 1}">Next</a></li>
-            <li><a href="/user/products/${id}?p=${product.totalPages - 1}">Last</a></li>
-        </c:if>
+			<c:if test="${product.number > 0}">
+				<li><a href="/user/products/${id}?p=0">First</a></li>
+				<li><a href="/user/products/${id}?p=${product.number - 1}">Prev</a></li>
+			</c:if>
+			<c:if test="${product.number < product.totalPages - 1}">
+				<li><a href="/user/products/${id}?p=${product.number + 1}">Next</a></li>
+				<li><a href="/user/products/${id}?p=${product.totalPages - 1}">Last</a></li>
+			</c:if>
 		</ul>
 	</div>
 	<br class="clr" />

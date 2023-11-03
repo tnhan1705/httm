@@ -13,11 +13,9 @@
 	<div class="row">
 		<!-- Product Image -->
 		<div id="gallery" class="span3">
-			<a href="themes/images/products/large/f1.jpg"
-				title="Fujifilm FinePix S2950 Digital Camera"> <img
-				src="/templates/User/bootstrap-shop/themes/images/Product/${ productDetails.image }"
+			<img
+				src="/templates/image/${ productDetails.image }"
 				style="width: 100%" alt="Fujifilm FinePix S2950 Digital Camera" />
-			</a>
 			<div id="differentview" class="moreOptopm carousel slide">
 				<div class="carousel-inner">
 					<div class="item active"></div>
