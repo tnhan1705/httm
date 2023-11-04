@@ -50,7 +50,7 @@ public class UserProductDetailsController {
 		mav.addObject("productSeries", userSeriServiceImpl.getAllSeriByProduct(id));
 		mav.addObject("category", userHomeServiceImpl.getCategory());
 		
-		List<Seri> listSeri = userSeriServiceImpl.getAllSeriByProduct(id);
+		List<Seri> listSeri = userSeriServiceImpl.findAllByProduct_IdAndStatus(id, true);
 		Map<String, Integer> mp= new HashMap<>();
 		for (Seri seri : listSeri) {
 			String color = seri.getColor();

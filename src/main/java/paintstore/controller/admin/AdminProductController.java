@@ -19,11 +19,14 @@ import paintstore.Utils.SecurityUtils;
 import paintstore.entity.Account;
 import paintstore.entity.Category;
 import paintstore.entity.Product;
+import paintstore.entity.Seri;
 import paintstore.entity.Staffs;
 import paintstore.repository.ProductPepository;
+import paintstore.repository.SeriRepository;
 import paintstore.service.AccountService;
 import paintstore.service.CategoryService;
 import paintstore.service.ProductService;
+import paintstore.service.SeriService;
 import paintstore.service.StaffService;
 
 
@@ -45,7 +48,11 @@ public class AdminProductController {
 	@Autowired
 	private ProductPepository pepository;
 	
+	@Autowired
+	private SeriService seriService;
 	
+	@Autowired
+	private SeriRepository seriRepository;
 	@RequestMapping("product/list")
 	public ModelAndView listProduct() {
 		ModelAndView mav = new ModelAndView("admin/product/listproduct");
@@ -105,6 +112,14 @@ public class AdminProductController {
 		return mav;
 		
 		
+	}
+	@GetMapping("product/detail")
+	public ModelAndView productDetail(@RequestParam("idp") String idp) {
+		ModelAndView mav = new ModelAndView();
+		List<Seri> seris = seriRepository.findAllByProduct_IdOrderByReceipt_Id(idp);
+		mav.addObject("listseri", seris);
+		mav.setViewName("admin/product/detail-product");
+		return mav;
 	}
 	
 	@GetMapping("product/edit")

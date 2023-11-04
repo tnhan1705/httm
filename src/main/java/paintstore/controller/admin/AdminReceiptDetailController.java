@@ -1,8 +1,10 @@
 package paintstore.controller.admin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,6 +32,7 @@ import paintstore.repository.ReceiptRepository;
 import paintstore.service.AccountService;
 import paintstore.service.ProductService;
 import paintstore.service.ReceiptService;
+import paintstore.service.SeriService;
 import paintstore.service.StaffService;
 
 @Controller
@@ -50,6 +53,9 @@ public class AdminReceiptDetailController {
 	@Autowired 
 	private ProductPepository productPepository;
 	
+	@Autowired
+	private SeriService seriService;
+	
 	@GetMapping("receipt-detail/list")
 	public ModelAndView getListReceiptDetail(@RequestParam("idr") String idr) {
 		
@@ -63,6 +69,23 @@ public class AdminReceiptDetailController {
 		mav.addObject("sum", sum);
 		Receipt receipt = receiptService.findById(idr);
 		mav.addObject("receipt", receipt);
+		
+		
+		
+		
+		for (ReceiptDetail receiptDetail : listReceiptDetail) {
+			List<Seri> seris = seriService.findAllByReceipt_IdAndProduct_Id(idr, receiptDetail.getProduct().getId());
+					
+			Map<String, Integer> mp = new HashMap<>();
+			for (Seri seri : seris) {
+				String color = seri.getColor();
+				mp.put(color,mp.getOrDefault(color, 0)+ 1);
+				
+			}
+			mav.addObject("ColorAndQuantity"+receiptDetail.getProduct().getId(), mp);
+			
+		}
+		
 		mav.setViewName("admin/receipt/receipt-detail/list-receiptdetail");
 		return mav;
 		
@@ -173,6 +196,7 @@ public class AdminReceiptDetailController {
 			seri.setId(seriId);
 			seri.setProduct(product1);
 			seri.setReceipt(receipt);
+			seri.setStatus(true);
 			seri.setColor(product.getListSeri().get(index).getColor());
 			index = index +1;
 			seris.add(seri);

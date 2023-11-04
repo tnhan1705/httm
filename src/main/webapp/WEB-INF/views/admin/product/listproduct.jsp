@@ -43,7 +43,7 @@
 							<td>${product.name}</td>
 							<td>${product.description}</td>
 							<td>${product.price}</td>
-							<td>${product.number}</td>
+							<td>${product.number} <a href="detail?idp=${product.id}"  >Chi tiết</a></td>
 							
 							
 							<td id="edit-cell">

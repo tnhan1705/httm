@@ -36,4 +36,10 @@ public class UserSeriServiceImpl implements UserSeriService {
 		// TODO Auto-generated method stub
 		return userSeriRepository.countByProductIdAndColor(id, color);
 	}
+
+	@Override
+	public List<Seri> findAllByProduct_IdAndStatus(String id, boolean status) {
+		
+		return userSeriRepository.findAllByProduct_IdAndStatus(id, status);
+	}
 }

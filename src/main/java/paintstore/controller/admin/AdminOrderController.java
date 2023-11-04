@@ -1,5 +1,6 @@
 package paintstore.controller.admin;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import paintstore.service.AccountService;
 import paintstore.service.OrderDetailService;
 import paintstore.service.OrderService;
 import paintstore.service.ProductService;
+import paintstore.service.SeriService;
 import paintstore.service.StaffService;
 import paintstore.Utils.SecurityUtils;
 import paintstore.entity.*;
@@ -45,6 +47,9 @@ public class AdminOrderController {
 	
 	@Autowired
 	private ProductPepository productRepository;
+	
+	@Autowired
+	private SeriService seriService;
 	
 	@RequestMapping("order/list")
 	public ModelAndView listOrder() {
@@ -88,6 +93,12 @@ public class AdminOrderController {
             Product product = orderDetail.getProduct();
             int orderedQuantity = orderDetail.getQuantity();
             int currentInventory = product.getNumber();
+            
+            for(int i =0;i<orderedQuantity;i++) {
+            	Seri seri= seriService.findOneByProduct_IdAndColorAndStatus(product.getId(), orderDetail.getColor(),true);    
+            	seri.setStatus(false);
+            	seriService.save(seri);
+            }
             
             if (currentInventory >= orderedQuantity) {
                 int newInventory = currentInventory - orderedQuantity;
