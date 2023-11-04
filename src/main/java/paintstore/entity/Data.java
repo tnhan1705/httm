@@ -17,7 +17,11 @@ public class Data {
 	
 	@Column(name = "LUACHON",length = 50)
 	private String select;
-
+	
+	public Data() {
+		
+	}
+	
 	public String getId() {
 		return id;
 	}
