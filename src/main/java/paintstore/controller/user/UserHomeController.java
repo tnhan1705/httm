@@ -67,8 +67,8 @@ public class UserHomeController {
 	@Autowired
 	UserService userService;
 	
-	//@Autowired
-	//DataService dataService;
+	@Autowired
+	DataService dataService;
 
 	@Autowired
 	UserProductsService userProductsService;
@@ -122,12 +122,18 @@ public class UserHomeController {
 	public ModelAndView advise(@RequestParam(name = "keyword") String keyword, Model model, @RequestParam("p") Optional<Integer> p) throws UnsupportedEncodingException {
 		ModelAndView mav = new ModelAndView("user/user-products");
 		RestTemplate restTemplate = new RestTemplate();
+		
         String pythonServiceUrl = "http://localhost:5000/GetAdvise"; // Replace with the actual Python service URL
         // Encode the keyword as UTF-8
         byte[] keywordBytes = keyword.getBytes("UTF-8");
         String result = restTemplate.postForObject(pythonServiceUrl, keywordBytes, String.class);
         byte[] utf8Bytes = result.getBytes("UTF-8");
         String decodedText = new String(utf8Bytes, StandardCharsets.UTF_8);
+        Data data = new Data();
+        data.setId(RandomStringGenerator.generateRandomString(10));
+        data.setContent(keyword);
+        data.setSelect(decodedText);
+        dataService.save(data);
         mav.addObject("ResultAdvise", "Màu sắc phù hợp với nhu cầu của bạn là: " + decodedText);
         List<Seri> listSeri = userSeriServiceImpl.getAllSeriByColor(decodedText);
         // Sử dụng HashSet để loại bỏ các MSP trùng nhau
@@ -149,13 +155,6 @@ public class UserHomeController {
 		List<Product> productsOnPage = getProductListForPage(listProduct, pageable);
 		page = new PageImpl<>(productsOnPage, pageable, listProduct.size());
         mav.addObject("product", page);
-        
-        /*
-        Data data = new Data();
-        data.setId(RandomStringGenerator.generateRandomString(10));
-        data.setContent(decodedText);
-        */
-        //dataService.save(data);
 		return mav;
 	}
 
