@@ -48,11 +48,15 @@
                                   <div class="button-container" style="display: inline-block;">
                                      <a href="/admin/order/detail?idc=${order.id}" class="edit-button">Chi tiết</a>
                                      <c:if test="${order.status == 'Đã Xác Nhận'}">
-                                     <a href="/admin/order/ship?ido=${order.id}" class="edit-button">Đóng gói Hoàn Tất</a>
+                                     <a href="/admin/order/ship?ido=${order.id}" class="edit-button">Giao hàng</a>
                                      </c:if>
+                                     <c:if test="${order.status == 'chờ duyệt'}">
                                      <a href="confirm?ido=${order.id}" class="edit-button">Xác nhận</a>
+                                     </c:if>
+                                     <c:if test="${order.status == 'chờ duyệt'}">
                                      <a href="delete?ido=${order.id}" class="edit-button" style="background-color: red"
                                      onclick="return confirm('Bạn có chắc chắn muốn xóa đơn đặt hàng này?');">Hủy</a>
+                                     </c:if>
                                   </div>
                             </td>
 
